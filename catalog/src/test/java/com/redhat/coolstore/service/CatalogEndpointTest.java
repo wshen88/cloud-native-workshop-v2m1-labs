@@ -35,6 +35,15 @@ public class CatalogEndpointTest {
     private TestRestTemplate restTemplate;
 
     //TODO: Add ClassRule for HoverFly Inventory simulation
+    @ClassRule
+    public static HoverflyRule hoverflyRule = HoverflyRule.inSimulationMode(dsl(
+            service("inventory:8080")
+    //                    .andDelay(2500, TimeUnit.MILLISECONDS).forMethod("GET")
+                    .get(startsWith("/services/inventory"))
+    //                    .willReturn(serverError())
+                    .willReturn(success("[{\"itemId\":\"329199\",\"quantity\":9999}]", "application/json"))
+
+    ));
 
     @Test
     public void test_retriving_one_proudct() {
@@ -45,6 +54,7 @@ public class CatalogEndpointTest {
                 .returns("329199",Product::getItemId)
                 .returns("Forge Laptop Sticker",Product::getName)
     //TODO: Add check for Quantity
+                .returns(9999,Product::getQuantity)
                 .returns(8.50,Product::getPrice);
     }
 
@@ -68,6 +78,7 @@ public class CatalogEndpointTest {
                 .returns("329299",Product::getItemId)
                 .returns("Red Fedora", Product::getName)
     //TODO: Add check for Quantity
+                .returns(9999,Product::getQuantity)
                 .returns(34.99,Product::getPrice);
     }
 

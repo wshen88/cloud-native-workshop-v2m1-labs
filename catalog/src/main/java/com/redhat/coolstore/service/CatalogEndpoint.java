@@ -6,6 +6,7 @@ import com.redhat.coolstore.model.Product;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/services")
 public class CatalogEndpoint {
     private final CatalogService catalogService;

@@ -14,6 +14,8 @@ angular.module("app")
 			baseUrl = (COOLSTORE_CONFIG.API_ENDPOINT.startsWith("http://") ? COOLSTORE_CONFIG.API_ENDPOINT : "http://" + COOLSTORE_CONFIG.API_ENDPOINT + '.' + $location.host().replace(/^.*?\.(.*)/g,"$1")) + '/services/products';
 		}
 	}
+	
+	baseUrl="http://catalog-springboot-user0-catalog.apps.cluster-dev-10b5.dev-10b5.open.redhat.com/services/products"
 
 	factory.getProducts = function() {
 		var deferred = $q.defer();
